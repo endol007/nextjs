@@ -1,8 +1,15 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import App, { AppContext, AppProps } from 'next/app';
+import 'tailwindcss/tailwind.css';
+import { wrapper } from '../store/configureStore';
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
-}
+const TestApp = ({ Component, pageProps }: AppProps) => {
+	return <Component {...pageProps} />
+};
 
-export default MyApp
+TestApp.getInitialProps = async (appContext: AppContext) => {
+	const appProps = await App.getInitialProps(appContext);
+
+	return { ...appProps };
+};
+
+export default wrapper.withRedux(TestApp);

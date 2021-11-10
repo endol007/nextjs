@@ -1,34 +1,56 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## NextJS
+React의 SSR을 쉽게 구현할 수 있게 도와주는 간단한 프레임워크이다.
 
-## Getting Started
+### SSR(Server-Side-Rendering)
+사용자가 웹 페이지에 접속했을 때 서버가 사용자에게 렌더링될 HTML을 응답하여 브라우저가 바로 렌더링할 수 있게 한다.
+그후 CSR과 동일하게 자바스크립트 파일을 다운로드 받고 실행한다.
+장점
+- 렌더링 속도가 빨라서 웹페이지 접속했을 때 바로 화면을 볼 수 있다.
+- SEO 최적화가 쉽다.
+단점
+- 서버 부하가 CSR보다 많음
+- 페이지 이동이 CSR보다 부드럽지 못하다.
 
-First, run the development server:
+### CSR(Client-Side-Rendering)
+사용자가 웹 페이지에 들어왔을 때 브라우저가 자바스크립트 파일을 다운로드 받아 해석한 후 렌더링한다.
+장점
+- 컴포넌트 정의와 재사용을 쉽게 할 수 있다.
+- 사용자에게 부드러운 UX를 줄 수 있다.
+- 페이지 구성에 필요한 데이터만 요청하기 때문에 서버 부하가 줄어든다.
+단점
+- 초기 로딩이 오래걸린다.
+- SEO 최적화가 쉽지 않다.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+그래서 SPA에서 SSR의 장점을 가지고 와서 사용하기 위해 Next.js와 같은 React SSR라이브러리를 이용한다.
+### Next.js 특징
+~~~
+1. 직관적인 라우팅 시스템
+2. 페이지를 자동으로 최적화
+3. 데이터가 필요한 페이지를 SSR 할 수 있게 지원
+4. 빠른 페이지 로드를 위한 자동 코드 스플리팅
+5. HMR을 지원 * HMR(Hot Module Replacement) 브라우저를 새로 고치지 않고 웹팩으로 빌드한 결과물이 웹 애플리케이션에 실시간으로 반영될 수 있게 도와주는 설정
+6. 커스터마이징이 쉬움
+~~~
+### Next.js의 작동방식
+Hydrate: ReactDOM 함수
+~~~
+1. next.js가 Server-Side에서 미리 웹페이지를 Pre-Rendering하고 그 HTML DOC을 클라이언트에 전송한다
+2. 그리고 Next.js는 리액트가 번들링된 자바스크립트 코드들을 클라이언트에게 전송한다.
+3. 이 자바스크립트 코드들이 이전에 보내진 HTML DOM 요소위에서 한번더 렌더링을 하면서 각자의 자리를 찾아가며 매칭이 된다
+~~~
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+SEO(Search Engine Optimization)
+- 검색엔진 최적화로 검색 결과에서의 상위 노출
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### SSG(Static-Site-Generation)
+SSG 방식은 빌드타임시 우리가 pages 폴더에서 작성한 각 페이지들에 대한 각각의 HTML문서를 생성해서 static 문서로 가지고 있게 된다. 이페이지에 대한 유저들의 요청이 발생하게 되면, 요청에 따라 계속 서버에서 재생성 하는 것이 아니라 이미 생성이 완료된 페이지를 반환해주게 된다. 따라서 생성이 완료된 HTML문서를 재활용 하기에 응답 속도가 매우 빠르다.
+- 퍼포먼스에 집중(CDN을 통해 더 빠른 응답 가능)
+- 마케팅 페이지 / 블로그 게시물 / 제품의 목록 등과 같이 정적 생성하여 각 요청에 동일한 문서를 반환할 수 있는 경우
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### SSR(Server-Side-Rendering)
+유저의 요청 때 마다 그에 상응하는 HTML 문서를 생성하여 반환하는 방식이다. 즉 이전 포스팅에서 계속 설명해오던 바로 그 방식을 말한다. SSR을 사용하는 경우는
+- 항상 최신상태를 유지해야 하는 경우 (요청에 따라 응답해야 할 내용이 시시 각각 변함)
+- 제품의 상세 페이지 / 분석 차트 등 요청 마다 다른 내용 또는 형식의 HTML 문서가 반환되는 경우
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Eslint & Prettier
+문법 오류나 코드정리로 인해 많은 시간을 소비하게 되는데 이런 시간을 절약하고 해결해주는 툴이다.
