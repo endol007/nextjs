@@ -72,3 +72,7 @@ const boardSlice = createSlice({
 
 export const boardDataActions = boardSlice.actions;
 export default boardSlice;
+
+export function testServerSide(){
+  return boardDataActions.getBoards();
+}

@@ -12,6 +12,10 @@ const Home: NextPage = () => {
 			<Link href="/board">
 				<a>게시판 페이지</a>
 			</Link>
+			<br />
+			<Link href="/test">
+				<a>Test</a>
+			</Link>
 		</>
 	);
 };

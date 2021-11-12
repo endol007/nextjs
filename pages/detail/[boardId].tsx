@@ -24,7 +24,6 @@ const detail = () => {
 	const { boardId } = router.query;
 	const detailId = Number(boardId);
 	const index = board.findIndex(p => p.id === detailId);
-
 	const { title, name, comment, id } = form;
 
 	const onChange = (e: ChangeEvent<HTMLInputElement>) => {
